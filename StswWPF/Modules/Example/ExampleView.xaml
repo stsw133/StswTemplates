@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="StswWPF.ExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StswWPF"
+             xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750" d:Background="White">
+    <d:UserControl.DataContext>
+        <local:ExampleContext/>
+    </d:UserControl.DataContext>
+    
+    <DockPanel>
+        <!-- put controls here -->
+    </DockPanel>
+</UserControl>
