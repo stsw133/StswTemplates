@@ -5,19 +5,13 @@ namespace StswWPF;
 internal static class SQL
 {
     /// <summary>
-    /// Example connection string
+    /// Example connection strings
     /// </summary>
-    private static string connString = new StswDatabaseModel()
-    {
-#if RELEASE
-        Server = "",
+#if DEBUG
+    private static string connString = new StswDatabaseModel() { Server = "TEST", Database = "", Login = "", Password = "" }.GetConnString();
 #else
-        Server = "",
+    private static string connString = new StswDatabaseModel() { Server = "PROD", Database = "", Login = "", Password = "" }.GetConnString();
 #endif
-        Database = "",
-        Login = "",
-        Password = ""
-    }.GetConnString();
 
     /// <summary>
     /// Example method for getting list
@@ -32,9 +26,12 @@ internal static class SQL
             var query = $@"
                 select
                     1 [{nameof(ExampleModel.ID)}],
-                    'Example' [{nameof(ExampleModel.Name)}]";
+                    'Example' [{nameof(ExampleModel.Name)}]
+                from dbo.?
+                where ?=@Example1";
             using (var sqlDA = new SqlDataAdapter(query, sqlConn))
             {
+                sqlDA.SelectCommand.Parameters.AddWithValue("@Example1", string.Empty);
                 var dt = new DataTable();
                 sqlDA.Fill(dt);
                 return dt.MapTo<ExampleModel>();

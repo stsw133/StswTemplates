@@ -3,30 +3,33 @@
 /// If you need model that have info about item state for SQL saving data from DataGrid then use:
 /// <see cref="StswObservableObject"/> and <see cref="IStswCollectionItem"/>, otherwise you do not need them
 /// </summary>
-public class ExampleModel : StswObservableObject, IStswCollectionItem
+public class ExampleModel : StswObservableObject, IExample, IStswCollectionItem
 {
     public int ID { get; set; }
     public string? Name { get; set; }
+    public Example1? Example1 { get; set; }
+    public Example2? Example2 { get; set; }
 
-    /// IStswCollectionItem properties:
-    private string? _itemMessage;
+    #region IStswCollectionItem
     public string? ItemMessage
     {
         get => _itemMessage;
         set => SetProperty(ref _itemMessage, value);
     }
+    private string? _itemMessage;
 
-    private StswItemState _itemState;
     public StswItemState ItemState
     {
         get => _itemState;
         set => SetProperty(ref _itemState, value);
     }
+    private StswItemState _itemState;
 
-    private bool? _showDetails;
     public bool? ShowDetails
     {
         get => _showDetails;
         set => SetProperty(ref _showDetails, value);
     }
+    private bool? _showDetails;
+    #endregion
 }
