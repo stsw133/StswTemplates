@@ -1,5 +1,7 @@
 ﻿global using StswExpress;
+using System.Text;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace StswWPF;
 /// <summary>
@@ -7,6 +9,8 @@ namespace StswWPF;
 /// </summary>
 public partial class App : StswApp
 {
+    public IServiceProvider? ServiceProvider { get; private set; }
+
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
@@ -29,6 +33,29 @@ public partial class App : StswApp
         //StswResources.AvailableThemes.Remove(StswTheme.Auto);
         //StswResources.AvailableThemes.Remove(StswTheme.Pink);
         //StswSettings.Default.Theme = (int)StswTheme.Dark;
+
+        /// Dependency Injection implementation
+        var serviceCollection = new ServiceCollection();
+        ConfigureServices(serviceCollection);
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        ServiceProvider = serviceCollection.BuildServiceProvider();
+        MainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+        MainWindow.Show();
+    }
+
+    private void ConfigureServices(ServiceCollection serviceCollection)
+    {
+        /// Views
+        serviceCollection.AddSingleton<MainWindow>();
+
+        /// Contexts
+        serviceCollection.AddSingleton<ExampleContext>();
+
+        /// Services
+        serviceCollection.AddSingleton<ISQL, SQL>();
+
+        /// Stores
+        serviceCollection.AddSingleton<ExampleStore>();
     }
 
     /// add this event if you want log unhandled exceptions

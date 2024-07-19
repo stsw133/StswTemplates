@@ -2,22 +2,22 @@
 using System.Data.SqlClient;
 
 namespace StswWPF;
-internal static class SQL
+/// <summary>
+/// Defines methods for retrieving and saving example models to and from a SQL database.
+/// </summary>
+public class SQL : ISQL
 {
-    /// <summary>
-    /// Example connection strings
-    /// </summary>
 #if DEBUG
-    private static string connString = new StswDatabaseModel() { Server = "TEST", Database = "", Login = "", Password = "" }.GetConnString();
+    private readonly string connString = new StswDatabaseModel() { Server = "TEST", Database = "", Login = "", Password = "" }.GetConnString();
 #else
-    private static string connString = new StswDatabaseModel() { Server = "PROD", Database = "", Login = "", Password = "" }.GetConnString();
+    private readonly string connString = new StswDatabaseModel() { Server = "PROD", Database = "", Login = "", Password = "" }.GetConnString();
 #endif
 
     /// <summary>
-    /// Example method for getting list
+    /// Retrieves a collection of example models from the SQL database.
     /// </summary>
-    /// <returns>Enumerable of example models</returns>
-    internal static IEnumerable<ExampleModel> GetExampleModels()
+    /// <returns>An enumerable collection of <see cref="ExampleModel"/>.</returns>
+    public IEnumerable<ExampleModel> GetExampleModels()
     {
         using (var sqlConn = new SqlConnection(connString))
         {
@@ -40,10 +40,10 @@ internal static class SQL
     }
 
     /// <summary>
-    /// Example method for saving list
+    /// Saves a collection of example models to the SQL database.
     /// </summary>
-    /// <returns>Enumerable of example models</returns>
-    internal static void SaveExampleModels(StswBindingList<ExampleModel> models)
+    /// <param name="models">The collection of example models to save.</param>
+    public void SaveExampleModels(StswBindingList<ExampleModel> models)
     {
         using (var sqlConn = new SqlConnection(connString))
         {

@@ -3,7 +3,7 @@
 namespace StswWPF;
 
 /// <summary>
-/// Wartość używana do <see cref="ExampleModel.Example1"/>.
+/// Value used for <see cref="ExampleModel.Example1"/>.
 /// </summary>
 public enum Example1
 {
@@ -18,7 +18,7 @@ public enum Example1
 }
 
 /// <summary>
-/// Wartość używana do <see cref="ExampleModel.Example2"/>.
+/// Value used for <see cref="ExampleModel.Example2"/>.
 /// </summary>
 public enum Example2
 {
