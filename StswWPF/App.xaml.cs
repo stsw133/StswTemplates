@@ -23,7 +23,7 @@ public partial class App : StswApp
         //CommandManager.RegisterClassCommandBinding(typeof(StswWindow), new CommandBinding(commandBinding, (s, e) => OpenHelp()));
 
         /// example for removing language from config:
-        StswTranslator.AvailableLanguages = new() { "pl" };
+        StswTranslator.AvailableLanguages = ["pl"];
         StswSettings.Default.Language = "pl";
         /// example for removing theme from config:
         //StswResources.AvailableThemes.Remove(StswTheme.Auto);

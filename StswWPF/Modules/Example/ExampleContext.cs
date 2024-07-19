@@ -27,7 +27,7 @@ public class ExampleContext : StswObservableObject
         }
         catch (Exception ex)
         {
-            StswMessageDialog.Show(ex.ToString(), $"Błąd metody {nameof(Example2)}", StswDialogButtons.OK, StswDialogImage.Error);
+            StswMessageDialog.Show(ex, $"Błąd metody {nameof(Example2)}");
         }
     }
     private bool Example1Condition() => true;
@@ -45,7 +45,7 @@ public class ExampleContext : StswObservableObject
         }
         catch (Exception ex)
         {
-            await StswMessageDialog.Show(ex.ToString(), $"Błąd metody {nameof(Example2)}", StswDialogButtons.OK, StswDialogImage.Error);
+            await StswMessageDialog.Show(ex, $"Błąd metody {nameof(Example2)}");
         }
     }
     private bool Example2Condition() => true;
@@ -60,7 +60,7 @@ public class ExampleContext : StswObservableObject
         get => _exampleProperty1;
         set => SetProperty(ref _exampleProperty1, value);
     }
-    private StswBindingList<ExampleModel> _exampleProperty1 = new();
+    private StswBindingList<ExampleModel> _exampleProperty1 = [];
 
     /// <summary>
     /// Example property 2

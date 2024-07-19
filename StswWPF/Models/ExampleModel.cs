@@ -11,13 +11,6 @@ public class ExampleModel : StswObservableObject, IExample, IStswCollectionItem
     public Example2? Example2 { get; set; }
 
     #region IStswCollectionItem
-    public string? ItemMessage
-    {
-        get => _itemMessage;
-        set => SetProperty(ref _itemMessage, value);
-    }
-    private string? _itemMessage;
-
     public StswItemState ItemState
     {
         get => _itemState;
