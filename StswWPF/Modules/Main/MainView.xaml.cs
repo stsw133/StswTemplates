@@ -2,11 +2,11 @@
 
 namespace StswWPF;
 /// <summary>
-/// Interaction logic for ExampleView.xaml
+/// Interaction logic for MainView.xaml
 /// </summary>
-public partial class ExampleView : UserControl
+public partial class MainView : UserControl
 {
-    public ExampleView()
+    public MainView()
     {
         InitializeComponent();
     }

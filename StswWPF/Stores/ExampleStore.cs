@@ -1,4 +1,5 @@
 ﻿namespace StswWPF;
+
 /// <summary>
 /// Represents a store for managing a collection of examples.
 /// </summary>
@@ -73,7 +74,7 @@ public class ExampleStore
     public IDisposable DeferRefresh()
     {
         _refreshDefered = true;
-        return new RefreshBlocker(() =>
+        return new StswRefreshBlocker(() =>
         {
             _refreshDefered = false;
             OnExamplesChanged();

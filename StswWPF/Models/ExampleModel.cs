@@ -1,4 +1,5 @@
 ﻿namespace StswWPF;
+
 /// <summary>
 /// Represents an example model with various properties and implements state management for SQL saving from a DataGrid.
 /// </summary>

@@ -1,4 +1,5 @@
 ﻿namespace StswWPF;
+
 /// <summary>
 /// Defines methods for retrieving and saving example models to and from a SQL database.
 /// </summary>

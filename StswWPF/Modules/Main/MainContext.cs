@@ -1,23 +1,17 @@
 ﻿namespace StswWPF;
+
 /// <summary>
 /// Represents the context for examples, containing commands and properties related to examples.
 /// </summary>
-public class ExampleContext : StswObservableObject
+public class MainContext : StswObservableObject
 {
-    /// <summary>
-    /// Gets or sets the command for example 1.
-    /// </summary>
-    public StswCommand<object?> Example1Command { get; set; }
+    public StswAsyncCommand Example1Command { get; }
+    public StswCommand<object?> Example2Command { get; }
 
     /// <summary>
-    /// Gets or sets the asynchronous command for example 2.
+    /// Initializes a new instance of the <see cref="MainContext"/> class.
     /// </summary>
-    public StswAsyncCommand<object?> Example2Command { get; set; }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ExampleContext"/> class.
-    /// </summary>
-    public ExampleContext()
+    public MainContext()
     {
         Example1Command = new(Example1, Example1Condition);
         Example2Command = new(Example2, Example2Condition);
@@ -28,36 +22,38 @@ public class ExampleContext : StswObservableObject
     /// Example method 1 for synchronous command.
     /// </summary>
     /// <param name="value">Example value.</param>
-    private void Example1(object? value)
+    private async Task Example1()
     {
         try
         {
             // Perform some action here
+            await Task.Run(() => ExampleProperty1 = SQL.GetExampleModels().ToStswBindingList());
+        }
+        catch (Exception ex)
+        {
+            await StswMessageDialog.Show(ex, $"Method error: {nameof(Example1)}");
+        }
+    }
+    private bool Example1Condition() => !Example2Command.IsBusy;
+
+    /// <summary>
+    /// Example method 2 for asynchronous command.
+    /// </summary>
+    /// <param name="value">Example value.</param>
+    private void Example2(object? value)
+    {
+        try
+        {
+            // Perform some action here
+            SQL.SaveExampleModels(ExampleProperty1);
+            Example1Command.Execute(null);
         }
         catch (Exception ex)
         {
             StswMessageDialog.Show(ex, $"Method error: {nameof(Example2)}");
         }
     }
-    private bool Example1Condition() => true;
-
-    /// <summary>
-    /// Example method 2 for asynchronous command.
-    /// </summary>
-    /// <param name="value">Example value.</param>
-    private async Task Example2(object? value)
-    {
-        try
-        {
-            // do something here
-            await Task.Run(() => Thread.Sleep(10));
-        }
-        catch (Exception ex)
-        {
-            await StswMessageDialog.Show(ex, $"Method error: {nameof(Example2)}");
-        }
-    }
-    private bool Example2Condition() => true;
+    private bool Example2Condition() => !Example1Command.IsBusy && ExampleProperty1.Any(x => x.ItemState != StswItemState.Unchanged);
     #endregion
 
     #region Properties

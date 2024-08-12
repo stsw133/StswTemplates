@@ -10,8 +10,8 @@
                 <ResourceDictionary Source="/StswExpress;component/StswResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type local:ExampleContext}">
-                <local:ExampleView/>
+            <DataTemplate DataType="{x:Type local:MainContext}">
+                <local:MainView/>
             </DataTemplate>
             
         </ResourceDictionary>

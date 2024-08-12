@@ -1,4 +1,5 @@
 ﻿namespace StswWPF;
+
 /// <summary>
 /// Represents an example interface with various properties.
 /// </summary>
