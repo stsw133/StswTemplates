@@ -13,14 +13,13 @@
 
   <ItemGroup>
     <Folder Include="Logic\Validation\" />
-    <Folder Include="Modules\_base\" />
     <Folder Include="Modules\_shared\" />
     <Folder Include="Controls\" />
     <Folder Include="Utils\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="StswExpress" Version="0.9.2" />
+    <PackageReference Include="StswExpress" Version="0.12.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 

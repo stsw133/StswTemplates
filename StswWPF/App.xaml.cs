@@ -7,7 +7,7 @@ namespace StswWPF;
 /// </summary>
 public partial class App : StswApp
 {
-    public IServiceProvider? ServiceProvider { get; private set; }
+    //public IServiceProvider? ServiceProvider { get; private set; }
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -18,12 +18,13 @@ public partial class App : StswApp
         // CommandManager.RegisterClassCommandBinding(typeof(StswWindow), new CommandBinding(commandBinding, (s, e) => OpenHelp()));
 
         /// example for removing language from config:
-        StswTranslator.AvailableLanguages = ["pl"];
-        StswSettings.Default.Language = "pl";
+        // StswTranslator.AvailableLanguages = ["en"];
+        // StswSettings.Default.Language = "en";
 
         /// example for removing theme from config:
         // StswResources.AvailableThemes.Remove(StswTheme.Auto);
         // StswResources.AvailableThemes.Remove(StswTheme.Pink);
+        // StswResources.AvailableThemes.Remove(StswTheme.Spring);
         // StswSettings.Default.Theme = (int)StswTheme.Dark;
 
         /// Dependency Injection implementation

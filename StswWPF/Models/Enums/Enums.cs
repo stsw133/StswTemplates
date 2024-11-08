@@ -2,28 +2,23 @@
 
 namespace StswWPF;
 
-/// <summary>
-/// Value used for <see cref="ExampleModel.Example1"/>.
-/// </summary>
-public enum Example1
+public enum DocStatus
 {
-    [Description("Display0")]
-    Value0,
+    [Description("In buffer")]
+    Buffer = 0,
 
-    [Description("Display1")]
-    Value1,
+    [Description("Confirmed")]
+    Confirmed = 1,
 
-    [Description("Display2")]
-    Value2
+    [Description("Posted")]
+    Posted = 2,
+
+    [Description("Canceled")]
+    Canceled = -1
 }
 
-/// <summary>
-/// Value used for <see cref="ExampleModel.Example2"/>.
-/// </summary>
-public enum Example2
+public enum DocType
 {
-    Value0,
-    Value1,
-    Value2,
-    Value3
+    Purchase,
+    Sales
 }

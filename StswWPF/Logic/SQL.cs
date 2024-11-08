@@ -1,34 +1,23 @@
 ﻿namespace StswWPF;
-
-/// <summary>
-/// Defines methods for retrieving and saving example models to and from a SQL database.
-/// </summary>
 public static class SQL //: ISQL
 {
 #if DEBUG
-    private readonly static StswDatabaseModel DbMain = new() { Server = "TEST", Database = "", Login = "", Password = "" };
+    private readonly static StswDatabaseModel DbMain = new("SERVER_TEST", "DB_TEST", "LOGIN_TEST", "PASSWORD_TEST");
 #else
-    private readonly static StswDatabaseModel DbMain = new() { Server = "PROD", Database = "", Login = "", Password = "" };
+    private readonly static StswDatabaseModel DbMain = new("SERVER_PROD", "DB_PROD", "LOGIN_PROD", "PASSWORD_PROD");
 #endif
 
-    /// <summary>
-    /// Retrieves a collection of example models from the SQL database.
-    /// </summary>
-    /// <returns>An enumerable collection of <see cref="ExampleModel"/>.</returns>
-    public static IEnumerable<ExampleModel> GetExampleModels() => DbMain.Get<ExampleModel>($@"
+    public static IEnumerable<DocHeaderModel> GetDocs(int? id = null) => DbMain.Get<DocHeaderModel>($@"
         select
-            1 [{nameof(ExampleModel.ID)}],
-            'Example' [{nameof(ExampleModel.Name)}]
+            1 [{nameof(DocHeaderModel.ID)}],
+            'Example' [{nameof(DocHeaderModel.Name)}]
         from dbo.?
-        where ?=@Example1", new { Example1 = string.Empty });
-
-    /// <summary>
-    /// Saves a collection of example models to the SQL database.
-    /// </summary>
-    /// <param name="models">The collection of example models to save.</param>
-    public static void SaveExampleModels(StswBindingList<ExampleModel> models)
+        {(id != null ? "where ID=@ID" : string.Empty)}", new { id })!;
+    
+    public static void SetDocs(StswBindingList<DocHeaderModel> models)
     {
-        using var sqlTran = DbMain.BeginTransaction();
+        using var sqlConn = DbMain.OpenedConnection();
+        using var sqlTran = sqlConn.BeginTransaction();
 
         DbMain.ExecuteNonQuery($@"
             insert into dbo.? (Name)
